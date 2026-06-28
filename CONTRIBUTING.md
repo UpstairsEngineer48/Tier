@@ -11,7 +11,6 @@ Before contributing, please read `ARCHITECTURE.md`. The project is built around 
 The following principles guide every contribution:
 
 - One responsibility per file.
-- Simplicity over cleverness.
 - Prefer extending the project rather than modifying existing functionality.
 - Public interfaces should remain stable.
 - Minimize unnecessary dependencies.

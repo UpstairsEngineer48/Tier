@@ -2,12 +2,33 @@ import os
 import platform
 import subprocess
 import sys
+import ctypes
 
 TASK_NAME = "Dashboard"
 
 
 def install_windows():
+    def run_as_admin():
 
+        if ctypes.windll.shell32.IsUserAnAdmin():
+            return
+
+        print("Administrator privileges required.")
+        print("Requesting elevation...")
+
+        ctypes.windll.shell32.ShellExecuteW(
+            None,
+            "runas",
+            sys.executable,
+            os.path.abspath(__file__),
+            None,
+            1
+        )
+
+        sys.exit(0)
+
+    run_as_admin()
+    
     project_dir = os.path.dirname(os.path.abspath(__file__))
 
     print("Creating virtual environment...")
@@ -97,7 +118,7 @@ def install_windows():
         f'"{python_exe}" "{boot_py}"',
         "/F",
     ]
-
+    print(command)
     result = subprocess.run(
         command,
         capture_output=True,

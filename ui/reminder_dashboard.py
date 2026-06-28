@@ -12,7 +12,8 @@ def _progress_bar(done, goal, length=20):
     """
 
     done = min(done, goal)
-
+    if done==0:
+        return "░" * length
     filled = int((done / goal) * length)
 
     return "█" * filled + "░" * (length - filled)
