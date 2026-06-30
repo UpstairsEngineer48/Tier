@@ -1,8 +1,8 @@
-# Dashboard
+# Tier
 
 A modular terminal dashboard that launches automatically when you log in.
 
-The project follows a modular architecture, making it easy to add new dashboards without changing the application's core.
+It currently tracks your daily competitive programming progress and displays your personal to-do list, while remaining modular enough to support additional dashboards in the future.
 
 ---
 
@@ -11,12 +11,16 @@ The project follows a modular architecture, making it easy to add new dashboards
 ### Current
 
 - Automatic startup on Windows login
-- Automatic installation using a single installer
-- Boot animation while background tasks load
+- One-command installation (`install.py`)
+- Automatic virtual environment creation
+- Automatic dependency installation
+- Boot animation while data loads
 - Codeforces daily progress tracker
 - LeetCode daily progress tracker
-- Independent progress bars for each platform
+- Personal To-Do list
+- Independent progress bars
 - Configurable daily goals
+- Modular architecture
 
 ### Planned
 
@@ -24,23 +28,26 @@ The project follows a modular architecture, making it easy to add new dashboards
 - Multiple boot animations
 - Linux installer
 - macOS installer
-
+- Plugin system
 
 ---
 
 # Project Structure
 
 ```text
-Dashboard/
+Tier/
 │
 ├── assets/
+│   └── todo.txt
 │
 ├── modules/
-│   └── reminder.py
+│   ├── reminder.py
+│   └── todo.py
 │
 ├── ui/
 │   ├── animation.py
-│   └── reminder_dashboard.py
+│   ├── reminder_dashboard.py
+│   └── todo_dashboard.py
 │
 ├── boot.py
 ├── config.py
@@ -61,15 +68,15 @@ Dashboard/
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/Dashboard.git
-cd Dashboard
+git clone https://github.com/UpstairsEngineer48/Tier.git
+cd Tier
 ```
 
 ---
 
-## 2. Configure Dashboard
+## 2. Configure Tier
 
-Open `config.py` and update the following variables:
+Open `config.py` and update:
 
 ```python
 CODEFORCES_HANDLE = "your_handle"
@@ -79,7 +86,7 @@ CF_GOAL = 2
 LC_GOAL = 2
 ```
 
-You can also customize:
+You may also customize:
 
 - Name
 - Theme
@@ -87,9 +94,15 @@ You can also customize:
 - Animation
 - Timezone
 
+Edit your personal to-do list in:
+
+```text
+assets/todo.txt
+```
+
 ---
 
-## 3. Install Dashboard
+## 3. Install Tier
 
 ```bash
 python install.py
@@ -97,17 +110,17 @@ python install.py
 
 The installer automatically:
 
-- Creates a Python virtual environment
+- Creates a virtual environment
 - Installs all required dependencies
-- Registers Dashboard with Windows Task Scheduler
+- Registers Tier with Windows Task Scheduler
 
-Dashboard will automatically launch the next time you log in.
+Tier will automatically launch the next time you log in.
 
 ---
 
 # Manual Run
 
-If you want to test Dashboard without installing it:
+To run Tier manually:
 
 ```bash
 python boot.py
@@ -117,7 +130,7 @@ python boot.py
 
 # Architecture
 
-Dashboard follows a modular architecture.
+Tier follows a modular architecture.
 
 ```
 boot.py
@@ -134,11 +147,11 @@ Each component has a single responsibility.
 |-----------|----------------|
 | `boot.py` | Application controller |
 | `config.py` | Global configuration |
-| `modules/` | Fetch and process data |
-| `ui/` | Render dashboards |
+| `modules/` | Data collection and processing |
+| `ui/` | Terminal rendering |
 | `assets/` | Static resources |
 
-More information is available in **ARCHITECTURE.md**.
+See **ARCHITECTURE.md** for additional details.
 
 ---
 
@@ -148,9 +161,9 @@ More information is available in **ARCHITECTURE.md**.
 - Modules never import UI
 - UI never imports modules
 - Configuration belongs only in `config.py`
-- Features should be added as new modules
-- Minimize unnecessary dependencies
+- New features should be added as modules
 - Keep components loosely coupled
+- Minimize unnecessary dependencies
 
 ---
 
@@ -160,8 +173,7 @@ More information is available in **ARCHITECTURE.md**.
 - Rich
 - Requests
 
-The installer automatically installs all dependencies.
-
+The installer automatically installs all required dependencies.
 
 ---
 
@@ -169,10 +181,12 @@ The installer automatically installs all dependencies.
 
 Contributions are welcome.
 
-Before contributing, please read:
+Please read:
 
 - `ARCHITECTURE.md`
 - `CONTRIBUTING.md`
+
+before opening a pull request.
 
 ---
 
