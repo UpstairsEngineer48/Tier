@@ -1,0 +1,6 @@
+Fix startup delay
+Implement To-Do dashboard
+Improve install.py
+Add Linux installer
+Add GitHub dashboard
+Record demo GIF

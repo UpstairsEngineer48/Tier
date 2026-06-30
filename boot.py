@@ -2,7 +2,8 @@ import threading
 import time
 from config import ANIMATION,WINDOW_TITLE
 import os
-
+from modules.todo import get_todo_list
+from ui.todo_dashboard import render as draw_todo
 
 from modules.reminder import get_daily_stats
 
@@ -15,16 +16,16 @@ from ui.reminder_dashboard import draw_dashboard
 # =====================================================
 
 stats = None
-
+todo_list = None
 
 # =====================================================
 # BACKGROUND WORKER
 # =====================================================
 
 def load_data():
-    global stats
+    global stats,todo_list
     stats = get_daily_stats()
-
+    todo_list = get_todo_list()
 
 # =====================================================
 # MAIN
@@ -61,6 +62,9 @@ def main():
     # Draw dashboard
     draw_dashboard(stats)
 
+    # Draw to-do list
+    draw_todo(todo_list)
+    
     input("\nPress Enter to close...")
 
 
